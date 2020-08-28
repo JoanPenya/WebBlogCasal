@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+<meta charset="UTF-8">
+<title>Acces confidencial!</title>
+<link rel="stylesheet" th:href="@{/css/403.css}">
+<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+	integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
+	crossorigin="anonymous">
+<script
+	src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+	integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+	crossorigin="anonymous"></script>
+</head>
+<body>
+	<div class="negro">
+		<div class="col-md-12 row">
+			<div class="col-md-4">
+				<span></span>
+			</div>
+
+			<div class="col-md-4">
+				<img th:src="@{/img/logo.png}" width="100%">
+			</div>
+
+			<div class="col-md-4">
+				<span></span>
+			</div>
+		</div>
+		
+				<img th:src="@{/img/barra.png}" width="24.5%">
+				<img th:src="@{/img/barra.png}" width="24.5%">
+				<img th:src="@{/img/barra.png}" width="24.5%">
+				<img th:src="@{/img/barra.png}" width="24.5%">
+				
+				<br><br>
+				
+		<div class="col-md-12 row">
+			<div class="col-md-4">
+				<span></span>
+			</div>
+
+			<div class="col-md-4 text-center" >
+				<h1 class="font-weight-bold text-white">Aquesta pagina que has intentat 
+				accedir. Es totalment Confidencial</h1>
+				<br>
+				<h1 class="font-weight-bold text-white">Pots tornar a la pagina d'inici:</h1>
+				<br>
+				<div sec:authorize="hasRole('ROLE_DINAMIZADOR')">
+					<a class="btn btn-primary text-white btn-lg" th:href="@{/admin}">Tornar</a>
+				</div>
+				<div sec:authorize="hasRole('ROLE_USER')">
+					<a class="btn btn-primary text-white btn-lg" th:href="@{/}">Tornar</a>
+				</div>
+			</div>
+			
+			<div class="col-md-4">
+				<span></span>
+			</div>
+		</div>
+			
+	</div>
+
+</body>
+</html>

@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html xmlns:th="http://thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head th:replace="layout/layout :: head"></head>
+<body>
+
+	<header th:replace="layout/layout :: header"></header>
+
+	<!-- CARRUSEL -->
+
+
+	<div id="carouselExampleIndicators" class="carousel slide"
+		data-ride="carousel">
+		<ol class="carousel-indicators">
+			<li data-target="#carouselExampleIndicators" data-slide-to="0"
+				class="active"></li>
+			<li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+			<li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+			<li data-target="#carouselExampleIndicators" data-slide-to="3"></li>
+			<li data-target="#carouselExampleIndicators" data-slide-to="4"></li>
+			<li data-target="#carouselExampleIndicators" data-slide-to="5"></li>
+		</ol>
+		<div class="carousel-inner">
+			<div class="carousel-item active">
+				<img class="d-block w-100 imagen-web" th:src="@{/img/logo.png}"
+					alt="First slide">
+			</div>
+			<div class="carousel-item"
+				th:each="carPublicacion: ${carPublicacion}">
+				<a th:href="@{/publicacion/} + ${carPublicacion.idPublicacion}">
+					<img class="d-block w-100 imagen-web"
+					th:src="@{'/uploads/' + ${carPublicacion.foto}}"
+					th:alt="${carPublicacion.foto}">
+					<div class="carousel-caption d-none d-md-block">
+						<h5 th:text="${carPublicacion.titulo}"></h5>
+						<div class="texto">
+							<span th:text="${carPublicacion.descripcion}"></span>
+						</div>
+					</div>
+				</a>
+			</div>
+		</div>
+		<a class="carousel-control-prev" href="#carouselExampleIndicators"
+			role="button" data-slide="prev"> <span
+			class="carousel-control-prev-icon" aria-hidden="true"></span> <span
+			class="sr-only">Previous</span>
+		</a> <a class="carousel-control-next" href="#carouselExampleIndicators"
+			role="button" data-slide="next"> <span
+			class="carousel-control-next-icon" aria-hidden="true"></span> <span
+			class="sr-only">Next</span>
+		</a>
+	</div>
+
+	<br>
+	<br>
+	<!-- POST Y EL MENU -->
+
+	<div class="col-md-12 row">
+
+		<div class="col-md-9">
+			<!-- POSTS -->
+
+			<div class="col-sm-12 row">
+			
+				<div class="col-sm-6" th:each="publicacion: ${publicacion}">
+					<div class="card">
+						<img class="card-img-top imagen-web"
+							th:src="@{'/uploads/' + ${publicacion.foto}}"
+							alt="Card image cap" />
+						<div class="card-body">
+							<h5 class="card-title" th:text="${publicacion.titulo}"></h5>
+							<hr>
+							<div class="card-text texto"> <span th:text="${publicacion.descripcion}"> </span></div>
+							<hr>
+							<a th:href="@{/publicacion/} + ${publicacion.idPublicacion}"
+								class="btn btn-primary">Ver más</a>
+						</div>
+					</div>
+					<br>
+				</div>
+
+			</div>
+
+			<!-- Paginas -->
+			<br>
+
+			<div class="paginacion">
+				<nav th:replace="paginator-nav :: paginator"></nav>
+			</div>
+		</div>
+
+		<div class="col-md-3">
+			<div th:replace="layout/layout :: menu"></div>
+		</div>
+
+	</div>
+
+	<br>
+	<br>
+
+	<footer th:replace="layout/layout :: footer"></footer>
+
+	<script type="text/javascript">
+	var arrayText=Array();
+
+	 
+
+    $(document).ready(function(){
+
+
+		$(".texto").each(function(){
+
+			var firstDiv=$(this).find("span:first-child");
+
+			if(firstDiv.html().length>100)
+
+			{
+				arrayText.push(firstDiv.html());
+				firstDiv.html(firstDiv.html().substr(0,100)+"...");
+
+
+			}
+			$(this).show();
+
+		});
+
+	});
+	</script>
+
+</body>
+</html>

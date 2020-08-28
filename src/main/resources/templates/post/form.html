@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html xmlns:th="http://thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head th:replace="layout/layoutDashboard :: head"></head>
+<body>
+	<div class="col-md-12 row">
+
+		<div class="col-md-2">
+			<div th:replace="layout/layoutDashboard :: header"></div>
+		</div>
+
+		<div class="col-md-10">
+			<div th:replace="layout/layoutDashboard :: navDash"></div>
+
+			<br> <br>
+			<div class="text-center">
+				<h3 th:text="${titol}"></h3>
+			</div>
+			<br>
+			<br>
+
+			<div class="col-md-12 row">
+				<div class="col-md-2">
+					<span> </span>
+				</div>
+
+				<!-- Formulari del post -->
+				<div class="col-md-8">
+					<form th:action="@{/admin/post/}" th:object="${publicacion}"
+						method="post" enctype="multipart/form-data">
+						<div class="form-group">
+							<label for="title">Titol: </label> <input type="text"
+								th:field="*{titulo}" class="form-control" required />
+						</div>
+
+						<div class="form-group">
+							<label for="foto">Imagen: </label> <input type="file" name="foto"
+								class="form-control" required />
+						</div>
+
+						<div class="form-group">
+							<label for="descripcion">descripcion: </label>
+							<textarea class="form-control" rows="8" 
+							th:field="${publicacion.descripcion}" required> </textarea>
+						</div>
+
+						<input type="submit" class="btn btn-primary" value="Crear-lo" />
+
+					</form>
+				</div>
+
+				<div class="col-md-2">
+					<span> </span>
+				</div>
+			</div>
+		</div>
+
+
+	</div>
+
+</body>
+</html>

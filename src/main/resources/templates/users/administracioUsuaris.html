@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html xmlns:th="http://thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head th:replace="layout/layoutDashboard :: head"></head>
+<body>
+	<div class="col-md-12 row">
+
+		<div class="col-md-2">
+			<div th:replace="layout/layoutDashboard :: header"></div>
+		</div>
+
+		<div class="col-md-10">
+			<div th:replace="layout/layoutDashboard :: navDash"></div>
+
+			<br> <br>
+			<div class="text-center">
+				<h3 th:text="${titol}"></h3>
+			</div>
+			<br>
+			<br>
+
+			<div class="col-md-12 row">
+				<div class="col-md-2">
+					<span> </span>
+				</div>
+				<div class="col-md-8">
+					<table class="table">
+						<thead>
+							<tr>
+								<th scope="col">#</th>
+								<th scope="col">Noms</th>
+								<th scope="col">Genere</th>
+								<th scope="col">Editar-lo</th>
+								<th scope="col">Eliminar-lo</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr th:each="usuarioJoven: ${usuarioJoven}">
+								<td scope="row" th:text="${usuarioJoven.idUsuarioJoven}"></td>
+								<td
+									th:text="${usuarioJoven.usuario.nombre} + ' ' + ${usuarioJoven.usuario.apellido}"></td>
+								<td th:text="${usuarioJoven.genero}"></td>
+								<td><a class="btn btn-primary"
+									th:href="@{/admin/users/editar/} + ${usuarioJoven.idUsuarioJoven}">Editar</a></td>
+								<td><a class="btn btn-danger"
+									th:href="@{/admin/users/eliminar/} + ${usuarioJoven.idUsuarioJoven}">Eliminar</a></td>
+							</tr>
+						</tbody>
+					</table>
+					<br>
+					<nav th:replace="paginator-nav :: paginator"></nav>
+				</div>
+				<div class="col-md-2">
+					<span> </span>
+				</div>
+			</div>
+		</div>
+
+
+	</div>
+
+</body>
+</html>

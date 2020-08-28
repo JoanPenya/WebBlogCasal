@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org/"
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head th:replace="layout/layout :: head"></head>
+<body>
+
+	<header th:replace="layout/layout :: header"></header>
+
+	<div class="col-md-12 row">
+
+		<div class="col-md-9">
+			<br> <br> <br>
+
+			<div sec:authorize="hasRole('ROLE_USER')">
+				<div class="text-center">
+					<h2>Tens idees, sugerencies, tallers...</h2>
+					<h1>ENVIA LA TEVA PROPOSTA! :D</h1>
+					<h1>ES TOTALMENT GRATUÏT!!!!</h1>
+					<br> <br>
+					<h2>PARTICIPA!!!</h2>
+					
+					<form th:action="@{/}" th:object="${propuesta}" method="post" >
+						<div class="form-group">
+							<textarea rows="10" cols="100" th:field="${propuesta.propuesta}"></textarea>
+						</div>
+
+						<input type="submit" class="btn btn-primary" value="ENVIAR">
+				
+					</form>
+				</div>
+			</div>
+			
+			<div sec:authorize="hasRole('ROLE_ADMIN') || hasRole('ROLE_DINAMIZADOR')">
+				<div class="text-center">
+					<h2>NOMES ES EXCLUSIU PELS USUARIS JOVES. SI VOLVS VEURE LES PROPOSTES QUE HAN ENVIAT. </h2>
+					<h3>SE POR DIRIGIR A LA PAGINA ADMINISTRADORA DE LES PROPOSTES.</h3>
+					<br><br>
+					<a class="btn btn-primary" th:href="@{/admin/propostes}">ADMINISTRAR</a>
+					
+				</div>
+			</div>
+			
+			
+		</div>
+
+		<div class="col-md-3">
+			<div th:replace="layout/layout :: menu"></div>
+		</div>
+
+	</div>
+
+	<footer th:replace="layout/layout :: footer"></footer>
+
+</body>
+</html>

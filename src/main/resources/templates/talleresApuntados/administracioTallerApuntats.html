@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html xmlns:th="http://thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head th:replace="layout/layoutDashboard :: head"></head>
+<body>
+	<div class="col-md-12 row">
+
+		<div class="col-md-2">
+			<div th:replace="layout/layoutDashboard :: header"></div>
+		</div>
+
+		<div class="col-md-10">
+			<div th:replace="layout/layoutDashboard :: navDash"></div>
+
+			<br> <br>
+			<div class="text-center">
+				<h3 th:text="${titol}"></h3>
+			</div>
+			<br> <br>
+
+			<div class="col-md-12 row">
+				<div class="col-md-2">
+					<span> </span>
+				</div>
+				<div class="col-md-8">
+					<table class="table">
+						<thead>
+							<tr>
+								<th scope="col">noms</th>
+								<th scope="col">genere</th>
+								<th scope="col">Eliminar</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr th:each="userXTaller: ${userXTaller}">
+								<td
+									th:text="${userXTaller.usuarioJoven.usuario.nombre} + ' ' + ${userXTaller.usuarioJoven.usuario.apellido}"></td>
+								<td th:text="${userXTaller.usuarioJoven.genero}"></td>
+								<td><a class="btn btn-danger text-white"
+									th:href="@{/admin/tallers/llista/eliminar/} + ${userXTaller.idUxT}">Eliminar
+										de la llista</a></td>
+							</tr>
+						</tbody>
+					</table>
+					<br>
+					<div class="col-md-12 row">
+						<div class="col-md-4">
+							<a class="btn btn-success" th:href="@{/admin/tallers/llista/apuntar/} + ${taller.idTaller}">Afegir participant</a>
+						</div>
+
+						<div class="col-md-4">
+							<span></span>
+						</div>
+
+						<div class="col-md-4">
+							<a class="btn btn-warning" th:href="@{'/talleresApuntados/administracioTallerApuntats/' + ${taller.idTaller}(format=pdf)}">pasar-lo en PDF</a>
+						</div>
+					</div>
+				</div>
+				<div class="col-md-2">
+					<span> </span>
+				</div>
+			</div>
+		</div>
+
+
+	</div>
+
+</body>
+</html>

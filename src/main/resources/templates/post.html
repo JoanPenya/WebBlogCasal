@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html xmlns:th="http://thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head th:replace="layout/layout :: head"></head>
+<body>
+
+	<header th:replace="layout/layout :: header"></header>
+
+
+	<!-- POST Y EL MENU -->
+
+	<div class="col-md-12 row">
+
+		<div class="col-md-9">
+
+			<div class="col-sm-12">
+
+				<div class="post">
+
+					<div class="text-center">
+						<h1 th:text="${publicacion.titulo}"></h1>
+					</div>
+					<br>
+					<div class="photo text-center">
+						<img th:src="@{'/uploads/' + ${publicacion.foto}}"
+							th:alt="${publicacion.foto}" width="75%">
+					</div>
+					<br>
+					<div class="desc" th:text="${publicacion.descripcion}"></div>
+
+					<ul class="text-center" th:if="${verTaller} != null">
+						<hr>
+						<p th:text="'Día y hora: ' + ${verTaller.diaHoraTaller}"></p>
+						<p th:text="'On: ' + ${verTaller.sitio}"></p>
+						<p th:text="'Places límitades: ' + ${verTaller.plaza}"></p>
+
+						<div sec:authorize="hasRole('ROLE_USER')">
+							<form th:action="@{/publicacion/} + ${publicacion.idPublicacion} + '/apuntar'" th:object="${userXTaller}" method="post">
+								<input type="submit" class="btn btn-primary"
+									value="Apuntar aquest taller">
+							</form>
+							
+							<!-- <div >
+								<button class="btn btn-secondary">Ja t'has apuntat</button>
+							</div>
+							
+							<div >
+								<button class="btn btn-danger">Places ocupades</button>
+							</div>-->
+						</div>
+						<hr>
+					</ul>
+
+					<br>
+					<div class="autor">
+						<p
+							th:text="'Autor: ' + ${nombre} + ' ' + ${apellido} + ' - Espai: ' + ${espai}"></p>
+						<p th:text="'Publicación: ' + ${publicacion.diaHoraPublicacion}"></p>
+					</div>
+
+				</div>
+				<br>
+
+				<div class="comentarios">
+
+
+
+
+					<div class="col-md-12">
+						<label><h2>Comentaris</h2>
+							<hr></label><br>
+
+						<div sec:authorize="hasRole('ROLE_USER')">
+							<form th:action="@{/publicacion/} + ${publicacion.idPublicacion}"
+								th:object="${nuevoComentarios}" method="post">
+
+								<div class="form-group">
+									<textarea rows="10" cols="100"
+										th:field="${nuevoComentarios.comentario}"></textarea>
+								</div>
+								<br>
+								<button type="submit" class="btn btn-primary">Comentar</button>
+							</form>
+						</div>
+
+					</div>
+					<br>
+
+					<div class="postComentaris col-md-9"
+						th:each="verComentarios: ${verComentarios}">
+
+						<div class="coment card">
+							<div class="card-body">
+								<div class="userComent">
+									<h3
+										th:text="${verComentarios.usuarioJoven.usuario.nombre} + ' ' + ${verComentarios.usuarioJoven.usuario.apellido} + ' dijo:'"></h3>
+									<hr>
+								</div>
+
+								<div class="comenRespuesta">
+									<p th:text="${verComentarios.comentario}"></p>
+								</div>
+
+								<div class="diaHora text-muted">
+
+									<small
+										th:text="'Dia de publicacion: ' + ${verComentarios.diaHoraComentario}"></small>
+								</div>
+							</div>
+						</div>
+						<br>
+					</div>
+
+
+				</div>
+
+
+			</div>
+
+
+		</div>
+
+		<div class="col-md-3">
+
+			<div th:replace="layout/layout :: menu"></div>
+
+		</div>
+
+	</div>
+
+	<br>
+	<br>
+
+
+	<footer th:replace="layout/layout :: footer"></footer>
+
+</body>
+</html>

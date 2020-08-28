@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html xmlns:th="http://thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head th:replace="layout/layoutDashboard :: head"></head>
+<body>
+	<div class="col-md-12 row">
+
+		<div class="col-md-2">
+			<div th:replace="layout/layoutDashboard :: header"></div>
+		</div>
+
+		<div class="col-md-10">
+			<div th:replace="layout/layoutDashboard :: navDash"></div>
+
+			<br> <br>
+			<div class="text-center">
+				<h3 th:text="${titol}"></h3>
+			</div>
+			<br>
+			<br>
+
+			<div class="col-md-12 row">
+				<div class="col-md-4">
+					<span> </span>
+				</div>
+				<div class="col-md-4">
+					<form th:action="@{/admin/dinamitzadors/}"
+						th:object="${dinamizador}" method="post">
+						<div class="form-group">
+							<label for="nombre">Nom</label> <input type="text"
+								class="form-control" th:field="${dinamizador.usuario.nombre}" required />
+						</div>
+						<div class="form-group">
+							<label for="apellido">Llinatge</label> <input type="text"
+								class="form-control" th:field="${dinamizador.usuario.apellido}" required />
+						</div>
+						<div class="form-group">
+							<label for="paisOrigen">Pais de naixament</label> <input
+								type="text" class="form-control"
+								th:field="${dinamizador.usuario.paisOrigen}" required />
+						</div>
+						<div class="form-group">
+							<label for="provincia">Provincia</label> <input type="text"
+								class="form-control" th:field="${dinamizador.usuario.provincia}" required />
+						</div>
+						<div class="form-group">
+							<label for="barri">Barri</label> <input type="text"
+								class="form-control" th:field="${dinamizador.usuario.barri}" required />
+						</div>
+						<div class="form-group">
+							<label for="dni">DNI</label> <input type="text"
+								class="form-control" th:field="${dinamizador.usuario.dni}" required />
+						</div>
+						<div class="form-group">
+							<label for="telefono">Numero de telefon</label> <input
+								type="text" class="form-control"
+								th:field="${dinamizador.usuario.telefono}" required />
+						</div>
+						<div class="form-group">
+							<label for="email">E-mail</label> <input type="email"
+								class="form-control" th:field="${dinamizador.usuario.email}" required />
+						</div>
+						<div class="form-group">
+							<label for="contrasenya">Contrasenya</label> <input
+								type="password" class="form-control"
+								th:field="${dinamizador.usuario.contrasenya}" required />
+						</div>
+						<div class="form-group">
+							<label for="exampleFormControlSelect1">Area</label> <select
+								class="form-control" th:field="${dinamizador.tipo}">
+								<option value="Creacio Artistica">Creacio Artistica</option>
+								<option value="Ludoteca">Ludoteca</option>
+								<option value="Diversitat">Diversitat</option>
+								<option value="Art Moviment">Art Moviment</option>
+								<option value="Musica i so">Música i so</option>
+							</select>
+						</div>
+						<div class="form-group">
+							<select class="form-control"
+								th:field="${dinamizador.usuario.role}">
+								<option value="ROLE_DINAMIZADOR">ROLE_DINAMIZADOR</option>
+							</select>
+						</div>
+						<br>
+						<button type="submit" class="btn btn-primary">Crear-lo</button>
+					</form>
+				</div>
+				<div class="col-md-4">
+					<span> </span>
+				</div>
+			</div>
+		</div>
+
+
+	</div>
+
+</body>
+</html>

@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html xmlns:th="http://thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+<meta charset="UTF-8">
+<title>Espais Joves</title>
+
+<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+	integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
+	crossorigin="anonymous"></script>
+<script
+	src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+	integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+	crossorigin="anonymous"></script>
+
+<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+	integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
+	crossorigin="anonymous">
+<script
+	src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+	integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+	crossorigin="anonymous"></script>
+
+</head>
+<body>
+
+
+
+
+
+	<link rel="stylesheet" th:href="@{/css/index.css}">
+
+	<!-- carga NO TOCAR-->
+	<div class="col-md-12" id="contenedor_carga">
+		<img class="logo" id="logo" th:src="@{/img/logo.png}" height="150">
+
+		<img class="load" id="load" th:src="@{/img/load.gif}" height="150">
+	</div>
+
+	<!-- SCRIPTING -->
+	<script>
+		window.onload = function() {
+			var contenedor = document.getElementById('contenedor_carga');
+
+			contenedor.style.visibility = 'hidden';
+			contenedor.style.opacity = '0';
+		}
+	</script>
+
+	<link rel="stylesheet" th:href="@{/css/navbar.css}">
+
+	<!-- BARRA DEL NAVEGADOR -->
+	<nav class="navbar navbar-expand-lg fixed-top navbar-light bg-white">
+		<a class="navbar-brand" href="/"><img th:src="@{/img/logo.png}"
+			width="150"></a>
+
+		<div class="collapse navbar-collapse nav navbar-nav navbar-center"
+			id="navbarSupportedContent">
+			<ul class="navbar-nav mr-auto">
+				<li class="nav-item"><a class="nav-link" href="#">Noticies</a>
+				</li>
+				<li class="nav-item"><a class="nav-link" href="#">Agenda</a></li>
+				<li class="nav-item"><a class="nav-link" href="#">Comunitat</a>
+				</li>
+				<li class="nav-item dropdown"><a
+					class="nav-link dropdown-toggle" href="#" id="navbarDropdown"
+					role="button" data-toggle="dropdown" aria-haspopup="true"
+					aria-expanded="false"> Area </a>
+					<div class="dropdown-menu" aria-labelledby="navbarDropdown">
+						<a class="dropdown-item" href="#">Creació Artistica</a> <a
+							class="dropdown-item" href="#">Ludoteca</a> <a
+							class="dropdown-item" href="#">Diversitat</a> <a
+							class="dropdown-item" href="#">Art moviment</a> <a
+							class="dropdown-item" href="#">Música i so</a>
+					</div></li>
+				<li class="nav-item"><a class="nav-link" href="#">Propostes</a>
+				</li>
+			</ul>
+		</div>
+		<div class="collapse navbar-collapse nav navbar-nav navbar-right">
+			<ul class="navbar-nav mr-auto">
+				<li class="nav-item"><a class="nav-link dropdown-toggle"
+					href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+					aria-haspopup="true" aria-expanded="false"> sesion </a>
+					<div class="dropdown-menu sesion" aria-labelledby="navbarDropdown">
+						<form class="col-md-12">
+							<div class="form-group">
+								<label for="exampleInputEmail1">Email address</label> <input
+									type="email" class="form-control" id="exampleInputEmail1"
+									aria-describedby="emailHelp" placeholder="Enter email">
+								<small id="emailHelp" class="form-text text-muted">We'll
+									never share your email with anyone else.</small>
+							</div>
+							<div class="form-group">
+								<label for="exampleInputPassword1">Password</label> <input
+									type="password" class="form-control" id="exampleInputPassword1"
+									placeholder="Password">
+							</div>
+							<div class="form-check">
+								<input type="checkbox" class="form-check-input"
+									id="exampleCheck1"> <label class="form-check-label"
+									for="exampleCheck1">Check me out</label>
+							</div>
+							<br>
+							<button type="submit" class="btn btn-primary">Submit</button>
+						</form>
+						<hr>
+						<div class="col-md-12">
+							<button type="#" class="btn btn-danger" data-toggle="modal"
+								data-target="#exampleModal">Com puc registrar?</button>
+						</div>
+					</div></li>
+			</ul>
+		</div>
+	</nav>
+
+
+	<!-- Modal -->
+	<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog"
+		aria-labelledby="exampleModalLabel" aria-hidden="true">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="exampleModalLabel">Com puc
+						registrar-me?</h5>
+					<button type="button" class="close" data-dismiss="modal"
+						aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">
+					<p>Per poder registrar i participar els tallers i les
+						activitats que proporcionam els espais joves. Tens que anar als
+						casals per poder registrarte la participació.</p>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-primary" data-dismiss="modal">D'acord</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<br>
+	<br>
+	<br>
+	<br>
+
+
+	<!-- POST Y EL MENU -->
+
+	<div class="col-md-12 row">
+
+		<div class="col-md-9">
+
+			<div class="col-sm-12">
+
+				<div class="post">
+
+					<div class="text-center">
+						<h1>Prueba</h1>
+					</div>
+					<br>
+
+					<div class="photo text-center">
+						<img th:src="@{/img/3.jpg}" width="75%">
+					</div>
+					<br>
+
+					<ul class="col-md-12">
+						<li>Places: 15</li>
+						<li>On: Casal Tramuntana</li>
+						<li>Día i hora: 19/09/2019 - 19:45</li>
+						<li>Descripció: Vamos a jugar con la caca.</li>
+					</ul>
+
+					<div class="text-center">
+						<button class="btn btn-success btn-lg" data-toggle="modal"
+							data-target="#exampleModal">Apuntar-me</button>
+					</div>
+
+					<!-- Modal -->
+					<div class="modal fade" id="exampleModal" tabindex="-1"
+						role="dialog" aria-labelledby="exampleModalLabel"
+						aria-hidden="true">
+						<div class="modal-dialog" role="document">
+							<div class="modal-content">
+								<div class="modal-header">
+									<h5 class="modal-title" id="exampleModalLabel">Taller</h5>
+									<button type="button" class="close" data-dismiss="modal"
+										aria-label="Close">
+										<span aria-hidden="true">&times;</span>
+									</button>
+								</div>
+								<div class="modal-body">
+									<p>Vols apuntar-te aquest taller?</p>
+								</div>
+								<div class="modal-footer">
+									<button type="button" class="btn btn-danger"
+										data-dismiss="modal">No</button>
+									<button type="button" class="btn btn-success"
+										data-dismiss="modal" data-toggle="modal"
+										data-target="#exampleModal2">Si</button>
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<div class="modal fade" id="exampleModal2" tabindex="-1"
+						role="dialog" aria-labelledby="exampleModalLabel"
+						aria-hidden="true">
+						<div class="modal-dialog" role="document">
+							<div class="modal-content">
+								<div class="modal-header">
+									<h5 class="modal-title" id="exampleModalLabel">Taller</h5>
+									<button type="button" class="close" data-dismiss="modal"
+										aria-label="Close">
+										<span aria-hidden="true">&times;</span>
+									</button>
+								</div>
+								<div class="modal-body">
+									<p>T'has apuntat aquest taller.</p>
+								</div>
+								<div class="modal-footer">
+									<button type="button" class="btn btn-primary"
+										data-dismiss="modal">D'acord</button>
+								</div>
+							</div>
+						</div>
+					</div>
+
+				</div>
+				<br>
+
+				<div class="comentarios">
+
+
+
+
+
+					<form class="col-md-12">
+						<div class="form-group">
+							<label for="exampleInputPassword1"><h2>Comentari</h2>
+								<hr></label><br>
+							<textarea rows="10" cols="110"></textarea>
+						</div>
+						<br>
+						<button type="submit" class="btn btn-primary">Comentar</button>
+					</form>
+
+					<br>
+
+					<div class="postComentaris">
+
+						<div class="coment">
+
+							<div class="userComent">
+								<h3>PepitoComeCaca comento:</h3>
+								<hr>
+							</div>
+
+							<div class="comenRespuesta">
+								<p>Pepito, la mierda no se come</p>
+							</div>
+
+							<div class="diaHora">
+
+								<label>19:32 - 25/09/2019</label> <a href="#">responder</a>
+							</div>
+
+						</div>
+
+					</div>
+
+				</div>
+
+
+			</div>
+
+
+		</div>
+
+		<div class="col-md-3">
+
+
+
+
+
+			<!-- trobar -->
+			<div class="trobar">
+				<h1>Cercar</h1>
+				<hr>
+				<form class="form-inline">
+					<input class="form-control" type="search" placeholder="Search"
+						aria-label="Search">
+					<button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+				</form>
+			</div>
+
+			<br>
+
+			<!-- etiquetes -->
+			<div class="etiquetes">
+				<h1>tags</h1>
+				<hr>
+				<button type="button" class="btn btn-outline-dark">ludoteca</button>
+				<button type="button" class="btn btn-outline-dark">Videojocs</button>
+				<button type="button" class="btn btn-outline-dark">Literatura</button>
+				<button type="button" class="btn btn-outline-dark">Cultura</button>
+				<button type="button" class="btn btn-outline-dark">Cinema</button>
+				<button type="button" class="btn btn-outline-dark">Dança</button>
+				<button type="button" class="btn btn-outline-dark">Musica</button>
+				<button type="button" class="btn btn-outline-dark">DIY</button>
+			</div>
+
+			<br>
+
+			<!-- xarxes socials -->
+			<div class="xarxes">
+				<h1>Xarxes socials</h1>
+				<hr>
+				<p>
+					<a class="btn btn-primary" href="#">Facebook</a>
+				<p>
+				<p>
+					<a class="btn btn-info" href="#">twitter</a>
+				<p>
+				<p>
+					<a class="btn btn-warning" href="#">Instagram</a>
+				<p>
+				<p>
+					<a class="btn btn-danger" href="#">YouTube</a>
+				<p>
+			</div>
+
+			<br>
+
+			<!-- INJUVE LOGO -->
+			<div class="subencionat">
+				<h1>Patrocinat per:</h1>
+				<hr>
+				<div class="col-sm-12">
+					<img th:src="@{/img/índice.png}"> <img
+						th:src="@{/img/a-palma.png}">
+				</div>
+			</div>
+			<br>
+
+			<!-- enllaços d'interes -->
+			<div class="enllasos">
+				<h1>Enllaços d'interès</h1>
+				<hr>
+				<p>
+					<a class="btn btn-primary" href="#">Dinamo</a>
+				<p>
+				<p>
+					<a class="btn btn-primary" href="#">PalmaJove</a>
+				<p>
+				<p>
+					<a class="btn btn-primary" href="#">Serveis de Joventut</a>
+				<p>
+			</div>
+
+		</div>
+
+	</div>
+
+	<br>
+	<br>
+
+
+
+
+
+	<footer>
+		<hr>
+		<div class="text-center">
+			<p>Desenvolupat per: Joan Sebastia Penya Torres - (c) 2020</p>
+		</div>
+	</footer>
+
+</body>
+</html>

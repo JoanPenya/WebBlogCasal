@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html xmlns:th="http://thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head th:replace="layout/layoutDashboard :: head"></head>
+<body>
+	<div class="col-md-12 row">
+
+		<div class="col-md-2">
+			<div th:replace="layout/layoutDashboard :: header"></div>
+		</div>
+
+		<div class="col-md-10">
+			<div th:replace="layout/layoutDashboard :: navDash"></div>
+
+			<br> <br>
+			<div class="text-center">
+				<h3 th:text="${titol}"></h3>
+			</div>
+			<br>
+			<br>
+
+			<div class="col-md-12 row">
+				<div class="col-md-2">
+					<span> </span>
+				</div>
+				<div class="col-md-8">
+					<table class="table">
+						<thead>
+							<tr>
+								<th scope="col">#</th>
+								<th scope="col">Titulo</th>
+								<th scope="col">Dia y hora</th>
+								<th scope="col">Casal</th>
+								<th scope="col">Places</th>
+								<th scope="col">Editar-lo</th>
+								<th scope="col">Eliminar-lo</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr th:each="taller: ${taller}">
+								<td><a class="btn btn-primary btn-sm"
+									th:text="${taller.idTaller}"
+									th:href="@{/talleresApuntados/administracioTallerApuntats/} + ${taller.idTaller}"></a></td>
+								<td th:text="${taller.publicacion.titulo}"></td>
+								<td th:text="${taller.diaHoraTaller}"></td>
+								<td th:text="${taller.sitio}"></td>
+								<td th:text="${taller.plaza}"></td>
+								<td><a class="btn btn-primary"
+									th:href="@{/admin/tallers/form/} + ${taller.idTaller}">Editar
+										Taller</a></td>
+
+								<td><a class="btn btn-danger"
+									th:href="@{/admin/tallers/eliminar/} + ${taller.idTaller}">Eliminar
+										Taller</a></td>
+							</tr>
+						</tbody>
+					</table>
+					<br>
+					<nav th:replace="paginator-nav :: paginator"></nav>
+				</div>
+				<div class="col-md-2">
+					<span> </span>
+				</div>
+			</div>
+		</div>
+
+
+	</div>
+
+</body>
+</html>

@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html xmlns:th="http://thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head th:replace="layout/layoutDashboard :: head"></head>
+<body>
+	<div class="col-md-12 row">
+
+		<div class="col-md-2">
+			<div th:replace="layout/layoutDashboard :: header"></div>
+		</div>
+
+		<div class="col-md-10">
+			<div th:replace="layout/layoutDashboard :: navDash"></div>
+
+			<br> <br>
+			<div class="text-center">
+				<h3 th:text="${titol}"></h3>
+			</div>
+			<br>
+			<br>
+
+			<div class="col-md-12 row">
+				<div class="col-md-2">
+					<span> </span>
+				</div>
+				<div class="col-md-8">
+					<table class="table">
+						<thead>
+							<tr>
+								<th scope="col">#</th>
+								<th scope="col">titulo</th>
+								<th scope="col">Descripcion</th>
+								<th scope="col">Fecha de publicacion</th>
+								<th scope="col">Editar-lo</th>
+								<th scope="col">Eliminar-lo?</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr th:each="publicacion: ${publicacion}">
+								<td scope="row" th:text="${publicacion.idPublicacion}"></td>
+								<td th:text="${publicacion.titulo}"></td>
+								<td> <div class="texto"><span th:text="${publicacion.descripcion}"></span></div></td>
+								<td th:text="${publicacion.diaHoraPublicacion}"></td>
+								<td><a class="btn btn-primary"
+									th:href="@{/admin/post/form/} + ${publicacion.idPublicacion}">Editar</a></td>
+								<td><a class="btn btn-danger"
+									th:href="@{/admin/post/eliminar/} + ${publicacion.idPublicacion}">Eliminar</a></td>
+							</tr>
+						</tbody>
+					</table>
+					<br>
+					<nav th:replace="paginator-nav :: paginator"></nav>
+				</div>
+				<div class="col-md-2">
+					<span> </span>
+				</div>
+			</div>
+		</div>
+
+
+	</div>
+	
+	<script type="text/javascript">
+	var arrayText=Array();
+
+	 
+
+    $(document).ready(function(){
+
+
+		$(".texto").each(function(){
+
+			var firstDiv=$(this).find("span:first-child");
+
+			if(firstDiv.html().length>100)
+
+			{
+				arrayText.push(firstDiv.html());
+				firstDiv.html(firstDiv.html().substr(0,100)+"...");
+
+
+			}
+			$(this).show();
+
+		});
+
+	});
+	</script>
+
+</body>
+</html>
